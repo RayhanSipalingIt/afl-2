@@ -24,13 +24,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = [
     HomeScreen(), // Konten tab pertama
     DiscoverScreen(), // Konten tab kedua
-    ProfileScreen(
-      nama: '',
-      pekerjaan: '',
-      pengalaman: '',
-      email: '',
-      nomorTelepon: '',
-    ), // Konten tab ketiga
+    ProfileScreen(), // Konten tab ketiga
   ];
 
   @override
@@ -52,7 +46,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
-            label: 'Temukan',
+            label: 'Pendidikan',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -77,11 +71,8 @@ class HomeScreen extends StatelessWidget {
       children: <Widget>[
         SizedBox(height: 20),
         Image.asset(
-          'assets/images/download.jpeg',
-          width: 100,
-          height: 100,
-        ),
-        SizedBox(height: 180),
+          'assets/images/download.jpeg' ),
+        SizedBox(height: 250),
         Column(
           children: [
             ElevatedButton(
@@ -89,17 +80,11 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(
-                      nama: '',
-                      pekerjaan: '',
-                      pengalaman: '',
-                      email: '',
-                      nomorTelepon: '',
-                    ),
+                    builder: (context) => ProfileScreen(),
                   ),
                 );
               },
-              child: Text('Portofolio'),
+              child: Text('Profile'),
               style: ButtonStyle(
                 fixedSize: MaterialStateProperty.all(Size(100, 40)),
               ),
@@ -112,9 +97,9 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => DiscoverScreen()),
                 );
               },
-              child: Text('Input'),
+              child: Text('Pendidikan'),
               style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(Size(100, 40)),
+                fixedSize: MaterialStateProperty.all(Size(110, 40)),
               ),
             ),
           ],
@@ -124,84 +109,46 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class DiscoverScreen extends StatefulWidget {
-  @override
-  _DiscoverScreenState createState() => _DiscoverScreenState();
-}
 
-class _DiscoverScreenState extends State<DiscoverScreen> {
-  // Inisialisasi controller untuk menerima input dari pengguna.
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _jobController = TextEditingController();
-  final TextEditingController _experienceController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-
+class DiscoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Layar Input'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Kembali ke layar sebelumnya.
-          },
-        ),
+        title: Text('My Portfolio'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // Memanggil fungsi buildTextFormField untuk membuat TextFormField dengan konfigurasi tertentu.
-          buildTextFormField(_usernameController, 'Masukkan username Anda'),
-          buildTextFormField(_jobController, 'Masukkan pekerjaan Anda'),
-          buildTextFormField(_experienceController, 'Masukkan pengalaman Anda'),
-          buildTextFormField(_emailController, 'Masukkan email Anda'),
-          buildTextFormField(_phoneController, 'Masukkan nomor telepon Anda'),
-
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileScreen(
-                    nama: _usernameController.text,
-                    pekerjaan: _jobController.text,
-                    pengalaman: _experienceController.text,
-                    email: _emailController.text,
-                    nomorTelepon: _phoneController.text,
-                  ),
-                ),
-              );
-            },
-            child: Text('Ke Profil'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildTextFormField(
-      TextEditingController controller, String labelText) {
-    return Padding(
-      // Padding digunakan untuk memberikan ruang antara widget TextFormField dengan tepi layar.
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-      child: TextFormField(
-        // Membuat TextFormField untuk input teks.
-        controller:
-            controller, // Menghubungkan TextFormField dengan controller yang sesuai.
-        decoration: InputDecoration(
-          // Konfigurasi tampilan luar TextFormField.
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(99.0),
-            borderSide: BorderSide(
-              color: Colors.blue,
-              width: 5,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Riwayat Pendidikan:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
-          labelText: labelText, // Label yang ditampilkan di atas TextFormField.
-          labelStyle:
-              TextStyle(fontSize: 18), // Konfigurasi gaya teks untuk label.
+            SizedBox(height: 8),
+            Text('1. SD ABC (Tahun 2009-2015)'),
+            Text('2. SMP XYZ (Tahun 2015-2018)'),
+            Text('3. SMK 123 (Tahun 2018-2021)'),
+            SizedBox(height: 16),
+            Text(
+              'Cita-cita:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('Menjadi orang kaya raya'),
+            SizedBox(height: 16),
+            Text(
+              'Hobi:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text('1. Koding dan pengembangan aplikasi'),
+            Text('2. Membaca buku dan artikel teknologi'),
+            Text('3. Bermain musik'),
+            Text('4. Traveling dan fotografi'),
+            // Tambahkan bagian lainnya seperti keterampilan, pengalaman kerja, dll.
+          ],
         ),
       ),
     );
@@ -209,26 +156,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 }
 
 class ProfileScreen extends StatelessWidget {
-  // Simpanan info tentang pengguna, seperti nama, pekerjaan, pengalaman, email, dan nomor telepon.
-  final String _nama;
-  final String _pekerjaan;
-  final String _pengalaman;
-  final String _email;
-  final String _nomorTelepon;
-
-  // Buat layar profil dengan mengirimkan informasi pengguna yang diterima melalui konstruktor.
-  ProfileScreen({
-    required String nama,
-    required String pekerjaan,
-    required String pengalaman,
-    required String email,
-    required String nomorTelepon,
-  })  : _nama = nama,
-        _pekerjaan = pekerjaan,
-        _pengalaman = pengalaman,
-        _email = email,
-        _nomorTelepon = nomorTelepon;
-
+  final String nama = 'Rayhan Akhafi';
+  final String pekerjaan = 'Pekerjaan atau Bidang Anda';
+  final String pengalaman = 'Beberapa tahun dalam pengembangan perangkat lunak';
+  final String email = 'example@email.com'; // Ganti dengan email Anda
+  final String nomorTelepon = '+62 123 4567 890'; // Ganti dengan nomor telepon Anda
+  final String alamat = 'Alamat Anda'; // Ganti dengan alamat Anda
 
   @override
   Widget build(BuildContext context) {
@@ -240,15 +173,13 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Tampilkan gambar profil dengan CircleAvatar
             CircleAvatar(
+              radius: 50,
               backgroundImage: AssetImage('assets/images/download.jpeg'),
-              radius: 50, // Sesuaikan ukuran radius sesuai keinginan
             ),
-            SizedBox(height: 20), // Beri jarak antara gambar profil dan teks
-            SizedBox(height: 20), // Beri jarak antara gambar profil dan teks
+            SizedBox(height: 20),
             Text(
-              'Nama: $_nama',//menampilkan inputan dari discover screen
+              nama,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -256,7 +187,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Pekerjaan: $_pekerjaan',
+              pekerjaan,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
@@ -264,25 +195,40 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Pengalaman: $_pengalaman',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Email: $_email',
+              'Skill: Flutter, Dart, Mobile App Development', // Ganti dengan skill Anda
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
             SizedBox(height: 10),
             Text(
-              'Nomor Telepon: $_nomorTelepon',
+              'Pengalaman: $pengalaman',
               style: TextStyle(
                 fontSize: 16,
               ),
             ),
+            SizedBox(height: 10),
+            Text(
+              'Alamat: $alamat',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 40),
+            Text(
+              'Email: $email',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Nomor Telepon: $nomorTelepon',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            
           ],
         ),
       ),
